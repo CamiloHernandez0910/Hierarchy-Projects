@@ -1,0 +1,54 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "File Analyzer API",
+        "description": "API para analizar la estructura de archivos en un proyecto ZIP."
+    },
+    "host": "localhost:5001",
+    "basePath": "/api",
+    "schemes": ["http"],
+    "tags": [
+        { "name": "Files", "description": "Manejo de archivos" }
+    ],
+    "paths": {
+        "/files/upload": {
+            "post": {
+                "tags": ["Files"],
+                "summary": "Sube un archivo ZIP y devuelve su estructura en JSON.",
+                "consumes": ["multipart/form-data"],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "file",
+                        "type": "file",
+                        "required": true,
+                        "description": "Archivo ZIP a subir."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Estructura del proyecto en JSON."
+                    },
+                    "400": {
+                        "description": "Error en la subida."
+                    }
+                }
+            }
+        },
+        "/files/structure": {
+            "get": {
+                "tags": ["Files"],
+                "summary": "Obtiene la estructura de archivos analizados.",
+                "responses": {
+                    "200": {
+                        "description": "Devuelve la estructura del último archivo analizado."
+                    },
+                    "400": {
+                        "description": "No hay archivos procesados aún."
+                    }
+                }
+            }
+        }
+    }
+}
